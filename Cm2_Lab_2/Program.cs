@@ -10,14 +10,13 @@ namespace Cm2_Lb_2
             int number = rand.Next(1, 10);
             return number;
         }
+        
         public static int RandRound2()
         {
             var rand = new Random();
             int number = rand.Next(10, 100);
             return number;
         }
-
-
 
         static void Main(string[] args)
         {
@@ -28,15 +27,11 @@ namespace Cm2_Lb_2
             Console.WriteLine("GUESS MY NUMBER - (3)");
             Console.Write("Ваш вибір: ");
 
-
-
             byte namber;
             namber = byte.Parse(Console.ReadLine());
 
-
             switch (namber)
             {
-
                 case 1:
                     {
 
@@ -59,7 +54,6 @@ namespace Cm2_Lb_2
 
                             a += 0.25;
                         }
-
                         break;
                     }
                 case 2:
@@ -201,9 +195,12 @@ namespace Cm2_Lb_2
                         break;
                     }
                 default:
-                    break;
+                    {
+                        Console.WriteLine("Введено невірне число");
+                        break;
+                    }
             }
-
+            Console.ReadKey();
 
         }
     }
