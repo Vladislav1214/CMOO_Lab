@@ -21,7 +21,6 @@ namespace Cm2_Lab_1
                 {
                     Console.WriteLine("Введені дані не є числом");
                     Console.Write("Введіть повторно: ");
-                    return CheckingForANumberBt();
                 }
             }    
         }
