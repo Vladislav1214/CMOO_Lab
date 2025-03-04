@@ -8,33 +8,40 @@ namespace Cm2_Lab_1
         public static byte CheckingForANumberBt()
         {
             string arr;
-            arr = Console.ReadLine();
 
-            if (byte.TryParse(arr, out byte number))
+            while (true)
             {
-                return number;
-            }
-            else
-            {
-                Console.WriteLine("Введені дані не є числом");
-                Console.Write("Введіть повторно: ");
-                return CheckingForANumberBt();
-            }
+                arr = Console.ReadLine();
+
+                if (byte.TryParse(arr, out byte number))
+                {
+                    return number;
+                }
+                else
+                {
+                    Console.WriteLine("Введені дані не є числом");
+                    Console.Write("Введіть повторно: ");
+                    return CheckingForANumberBt();
+                }
+            }    
         }
         public static double CheckingForANumberDb()
         {
             string arr;
-            arr = Console.ReadLine();
+            
+            while (true)
+            {
+                arr = Console.ReadLine();
 
-            if (double.TryParse(arr, out double number))
-            {
-                return number;
-            }
-            else
-            {
-                Console.WriteLine("Введені дані не є числом");
-                Console.Write("Введіть повторно: ");
-                return CheckingForANumberDb();
+                if (double.TryParse(arr, out double number))
+                {
+                    return number;
+                }
+                else
+                {
+                    Console.WriteLine("Введені дані не є числом");
+                    Console.Write("Введіть повторно: ");
+                }
             }
         }
         static void Main(string[] args)
