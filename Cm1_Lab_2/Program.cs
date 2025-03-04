@@ -20,34 +20,40 @@ namespace Cm2_Lb_2
         public static byte CheckingForANumberBt()
         {
             string arr;
-            arr = Console.ReadLine();
 
-            if (byte.TryParse(arr, out byte number))
+            while (true)
             {
-                return number;
-            }
-            else
-            {
-                Console.WriteLine("Введені дані не є числом");
-                Console.Write("Введіть повторно: ");
-                return CheckingForANumberBt();
-            }
+                arr = Console.ReadLine();
+
+                if (byte.TryParse(arr, out byte number))
+                {
+                    return number;
+                }
+                else
+                {
+                    Console.WriteLine("Введені дані не є числом");
+                    Console.Write("Введіть повторно: ");
+                }
+            }       
         }
         public static int CheckingForANumberIn()
         {
             string arr;
-            arr = Console.ReadLine();
 
-            if (int.TryParse(arr, out int number))
+            while (true)
             {
-                return number;
-            }
-            else
-            {
-                Console.WriteLine("Введені дані не є числом");
-                Console.Write("Введіть повторно: ");
-                return CheckingForANumberIn();
-            }
+                arr = Console.ReadLine();
+
+                if (int.TryParse(arr, out int number))
+                {
+                    return number;
+                }
+                else
+                {
+                    Console.WriteLine("Введені дані не є числом");
+                    Console.Write("Введіть повторно: ");                   
+                }
+            }   
         }
 
         static void Main(string[] args)
