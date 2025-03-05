@@ -99,7 +99,7 @@ namespace Cm2_Lb_2
                     {
                         double term, y2, sum;
                         int n;
-                        double[] x2 = new double[3] { 0.2, 0.6, 0.9 };
+                        double[] x2 = new double[] { 0.2, 0.6, 0.9 };
 
                         for (int i = 0; i < 3; i++)
                         {
