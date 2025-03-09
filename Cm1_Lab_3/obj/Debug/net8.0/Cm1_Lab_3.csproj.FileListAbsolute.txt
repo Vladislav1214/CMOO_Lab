@@ -1,0 +1,14 @@
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\bin\Debug\net8.0\Cm1_Lab_3.exe
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\bin\Debug\net8.0\Cm1_Lab_3.deps.json
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\bin\Debug\net8.0\Cm1_Lab_3.runtimeconfig.json
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\bin\Debug\net8.0\Cm1_Lab_3.dll
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\bin\Debug\net8.0\Cm1_Lab_3.pdb
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\Cm1_Lab_3.GeneratedMSBuildEditorConfig.editorconfig
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\Cm1_Lab_3.AssemblyInfoInputs.cache
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\Cm1_Lab_3.AssemblyInfo.cs
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\Cm1_Lab_3.csproj.CoreCompileInputs.cache
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\Cm1_Lab_3.dll
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\refint\Cm1_Lab_3.dll
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\Cm1_Lab_3.pdb
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\Cm1_Lab_3.genruntimeconfig.cache
+E:\Visual_Studio\Laboratory\Cm1_Lab_3\obj\Debug\net8.0\ref\Cm1_Lab_3.dll
