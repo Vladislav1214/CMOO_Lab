@@ -46,8 +46,10 @@ namespace Cm1_Lab_3
 
             if (a > b)
             {
-                a = 0;
-                b = 10;
+                int reu;
+                reu = a;
+                a = b;
+                b = reu;
             }
         }
 
