@@ -10,9 +10,7 @@ namespace Cm1_Lab_4
         {
             while (true)
             {
-                string input = Console.ReadLine();
-
-                if (int.TryParse(input, out int number))           
+                if (int.TryParse(Console.ReadLine(), out int number))           
                     return number;
                 else
                 {
@@ -52,19 +50,19 @@ namespace Cm1_Lab_4
             catch (FileNotFoundException ex)
             {
                 Console.WriteLine($"Помилка: {ex.Message}");
-                return "001";
+                return "00.1";
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Сталася непередбачена помилка: {ex.Message}");
-                return "002"; 
+                return "00.2"; 
             }
         }
-        static void UpLoadArrayFromFileArray(string UpLoad)
+        static void UpLoadArrayFromFileArray(string upLoad)
         {
            using (StreamWriter fileContentUpLoad = new StreamWriter("TestUpLoad.txt"))
            {
-                fileContentUpLoad.WriteLine(UpLoad);
+                fileContentUpLoad.WriteLine(upLoad);
            }
         }
 
@@ -84,12 +82,12 @@ namespace Cm1_Lab_4
                         {
                             string fileContent = LoadArrayFromFileArray();
 
-                            if (fileContent == null || fileContent == "001")
+                            if (fileContent == null || fileContent == "00.1")
                             {
                                 Console.WriteLine("Файл пустий, введіть текст вручну:");
                                 return Console.ReadLine();
                             }                           
-                            else if (fileContent == "002")
+                            else if (fileContent == "00.2")
                             {
                                 Console.WriteLine("Сталася помилка читання файлу, спробуйте ще раз.");
                                 continue;
@@ -107,34 +105,36 @@ namespace Cm1_Lab_4
         static int Menu()
         {
             Console.WriteLine("Завдання (1)");
-            Console.WriteLine("Написати регулярний вираз, який визначає, чи є заданий рядок IP " +
-                "\nадресою, що записана у десятковому вигляді." +
-                "\n– правильний вираз: 127.0.0.1, 255.255.255.0." +
-                "\n– неправильний вираз: 1300.6.7.8, abc.def.gha.bcd.\n");
+            Console.WriteLine("Створити запит для вводу тільки правильно написаних виразів з " +
+                              "\nдужками (кількість відкритих та закритих дужок збігається )." +
+                              "\n– правильний вираз: (3 + 5) – 9 × 4." +
+                              "\n– неправильний вираз: ((3 + 5) – 9 × 4.\n");
             Console.WriteLine("Завдання (2)");
-            Console.WriteLine("Створити запит для вводу тільки правильно написаних виразів з \r\nдужками (кількість відкритих та закритих дужок збігається )." +
-                "\n– правильний вираз: (3 + 5) – 9 × 4." +
-                "\n– неправильний вираз: ((3 + 5) – 9 × 4.\n");
+            Console.WriteLine("Написати регулярний вираз, який визначає, чи є заданий рядок IP " +
+                              "\nадресою, що записана у десятковому вигляді." +
+                              "\n– правильний вираз: 127.0.0.1, 255.255.255.0." +
+                              "\n– неправильний вираз: 1300.6.7.8, abc.def.gha.bcd.\n");
             Console.WriteLine("Завдання (3)");
             Console.WriteLine("У рядку слів у кожному слові довжиною більше восьми елементів " +
-                "\nпоміняти місцями кожні два символи розпочавши з початку слова, " +
-                "\nа у інших словах поміняти перший символ та останній.\n");
+                              "\nпоміняти місцями кожні два символи розпочавши з початку слова, " +
+                              "\nа у інших словах поміняти перший символ та останній.\n");
             Console.Write("Ваш вибір: ");
             return CheckingForANumberInt();
         } 
-
+        
         static void Objectives()
         {
             bool flag = true;
             while (flag)
             {
+                Console.Clear();
+                
                 switch (Menu())
                 {
                     case 1:
                         {
                             string inputText = CreateStr();
-                            Console.Clear();
-
+                            
                             string bracketsOnly = Regex.Replace(inputText, "[^()]", "");
                             string pattern = @"^\s*(\(?\s*\d+\s*[\+\-\*/]\s*\d+\s*\)?\s*[\+\-\*/]\s*\d+\s*[\+\-\*/]\s*\d+\s*)+$";
                             bool isStructureValid = Regex.IsMatch(inputText, pattern);
@@ -177,11 +177,9 @@ namespace Cm1_Lab_4
                         {
                             string inputText = CreateStr();
                             // перевірка структури: (числа від 0 до 225, крапка як роздільник)
-                            string pattern = @"^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$";
-
+                            string pattern = @"[\d{0,225}]\.[\d{0,225}]\.[\d{0,225}]\.[\d{0,225]}";
                             bool isStructureValid = Regex.IsMatch(inputText, pattern);
-
-                            if (System.Net.IPAddress.TryParse(inputText, out _))
+                            if (isStructureValid)
                                 Console.WriteLine("IP-адреса правильна");
                             else
                                 Console.WriteLine("IP-адреса неправильна");
