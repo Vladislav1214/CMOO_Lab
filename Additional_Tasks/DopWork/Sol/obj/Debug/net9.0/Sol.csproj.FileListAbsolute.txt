@@ -1,0 +1,15 @@
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\bin\Debug\net9.0\Sol.exe
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\bin\Debug\net9.0\Sol.deps.json
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\bin\Debug\net9.0\Sol.runtimeconfig.json
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\bin\Debug\net9.0\Sol.dll
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\bin\Debug\net9.0\Sol.pdb
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.GeneratedMSBuildEditorConfig.editorconfig
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.AssemblyInfoInputs.cache
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.AssemblyInfo.cs
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.csproj.CoreCompileInputs.cache
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.sourcelink.json
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.dll
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\refint\Sol.dll
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.pdb
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\Sol.genruntimeconfig.cache
+E:\University\Предмети\Семестр_2\СМОО\CMOO_Lab\Additional_Tasks\DopWork\Sol\obj\Debug\net9.0\ref\Sol.dll
