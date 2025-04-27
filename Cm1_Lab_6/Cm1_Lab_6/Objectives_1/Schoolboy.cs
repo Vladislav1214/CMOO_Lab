@@ -3,21 +3,21 @@
 public class Schoolboy
 {
     private string? fullName;
-    private string? schoolName;
-    private string? className;
+    private string? educationalInstitutionName;
+    private string? groupName;
     private int[] grades;
-
+    
+    public Schoolboy(string fullName, string educationalInstitutionName, string groupName, int[] grades)
+    {
+        this.fullName = fullName;
+        this.educationalInstitutionName = educationalInstitutionName;
+        this.groupName = groupName;
+        this.grades = grades;
+    }
+    
     public Schoolboy()
     {
         
-    }
-
-    public Schoolboy(string fullName, string schoolName, string className, int[] grades)
-    {
-        this.fullName = fullName;
-        this.schoolName = schoolName;
-        this.className = className;
-        this.grades = grades;
     }
 
     public string FullName
@@ -31,25 +31,25 @@ public class Schoolboy
         }
     }
 
-    public string SchoolName
+    public string EducationalInstitutionName
     {
-        get { return schoolName ?? "NoSchoolName"; }
+        get { return educationalInstitutionName ?? "NoSchoolName"; }
         set
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException("Не може бути (null).");
-            schoolName = value;
+            educationalInstitutionName = value;
         }
     }
 
-    public string ClassName
+    public string GroupName
     {
-        get { return className ?? "NoClassName"; }
+        get { return groupName ?? "NoClassName"; }
         set
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException("Не може бути (null).");
-            className = value;
+            groupName = value;
         }
     }
 
@@ -66,9 +66,7 @@ public class Schoolboy
 
     public void ChangeSchool(string newSchool)
     {
-        if (string.IsNullOrEmpty(newSchool))
-            throw new ArgumentException("Назва школи не може бути пустою.");
-        SchoolName = newSchool;
+        EducationalInstitutionName = newSchool;
     }
 
     public void ChangeGrades(int[] newGrades)
@@ -88,7 +86,7 @@ public class Schoolboy
 
     public override string ToString()
     {
-        return $"Школяр: {FullName}, Школа: {SchoolName}, Клас: {ClassName}, Середній бал: {GetAverageGrade():F2}";
+        return $"Школяр: {FullName}, Школа: {EducationalInstitutionName}, Клас: {GroupName}, Середній бал: {GetAverageGrade():F2}";
     }
 
     public override bool Equals(object obj)
@@ -96,14 +94,14 @@ public class Schoolboy
         if (obj is Schoolboy other)
         {
             return fullName == other.fullName &&
-                   schoolName == other.schoolName &&
-                   className == other.className;
+                   educationalInstitutionName == other.educationalInstitutionName &&
+                   groupName == other.groupName;
         }
         return false;
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(FullName, SchoolName, ClassName);
+        return HashCode.Combine(FullName, EducationalInstitutionName, GroupName);
     }
 }

@@ -21,9 +21,14 @@ public class DataGeneratorUniversityStudent
         "Іванівна", "Петрівна", "Олександрівна", "Сергіївна"
     };
 
-    private static string[] universityNames =
+    private static string[] educationalInstitutionName =
     {
         "КНУ", "НТУУ 'КПІ'", "ЛНУ ім. Франка", "ХНУ ім. Каразіна", "ЧНУ ім. Федьковича"
+    };
+    
+    private static string[] specialtiesCourses =
+    {
+        "КН-1", "МЕ-2", "ЕЕ-3", "БТ-4", "МД-1"
     };
 
     private static string[] studyDirections =
@@ -35,16 +40,17 @@ public class DataGeneratorUniversityStudent
     {
         string fullName =
             $"{lastNames[DataGeneratorSchoolboy.rand.Next(lastNames.Length)]} {firstNames[DataGeneratorSchoolboy.rand.Next(firstNames.Length)]} {patronymics[DataGeneratorSchoolboy.rand.Next(patronymics.Length)]}";
-        string university = universityNames[DataGeneratorSchoolboy.rand.Next(universityNames.Length)];
-        string direction = studyDirections[DataGeneratorSchoolboy.rand.Next(studyDirections.Length)];
-        int year = DataGeneratorSchoolboy.rand.Next(2019, 2024);
-
+        string universityName = educationalInstitutionName[DataGeneratorSchoolboy.rand.Next(educationalInstitutionName.Length)];
+        string studyDirection = studyDirections[DataGeneratorSchoolboy.rand.Next(studyDirections.Length)];
+        string groupName = specialtiesCourses[DataGeneratorSchoolboy.rand.Next(specialtiesCourses.Length)];
+        int yearOfAdmission = DataGeneratorSchoolboy.rand.Next(2019, 2024);
+        
         int[] grades = new int[DataGeneratorSchoolboy.rand.Next(4, 8)];
         for (int i = 0; i < grades.Length; i++)
         {
             grades[i] = DataGeneratorSchoolboy.rand.Next(1, 13);
         }
 
-        return new UniversityStudent(fullName, university, direction, year, grades);
+        return new UniversityStudent(fullName, universityName, groupName, studyDirection, yearOfAdmission , grades);
     }
 }

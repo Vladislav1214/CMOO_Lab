@@ -3,13 +3,14 @@
 public abstract class Aircraft
 {
     private string? name;
+    private string? manufacturer; // Виробник
     private int year;
     private double maxAltitude; // Максимальна висота польоту, м
-    private string? manufacturer; // Виробник
     private double flightRange; // Дальність польоту, км
-    private int crewCount; // Кількість членів екіпажу
     private double payloadCapacity; // Вантажопідйомність, кг
     private string? fuelType; // Тип палива
+    private int crewCount; // Кількість членів екіпажу
+    
 
     public Aircraft(string name, int year, double maxAltitude, string manufacturer, 
         double flightRange, int crewCount, double payloadCapacity, string fuelType)

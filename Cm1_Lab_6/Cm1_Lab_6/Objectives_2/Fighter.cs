@@ -1,19 +1,19 @@
 ﻿namespace Cm1_Lab_6;
 
-public class Fighter : Airplane
+public class Fighter : Aircraft
 {
     private int maxSpeed; // Максимальна швидкість, км/год
     private int weaponCount; // Кількість одиниць озброєння
-
+    private int wingspan;
+    
     public Fighter(string name, int year, double maxAltitude, string manufacturer, 
         double flightRange, int crewCount, double payloadCapacity, string fuelType, 
-        int wingspan, int passengerCapacity, int maxSpeed, int weaponCount) 
-        : base(name, year, maxAltitude, manufacturer, flightRange, crewCount, payloadCapacity, fuelType, wingspan, passengerCapacity)
+        int wingspan, int maxSpeed, int weaponCount) 
+        : base(name, year, maxAltitude, manufacturer, flightRange, crewCount, payloadCapacity, fuelType)
     {
-        
-        
         this.maxSpeed = maxSpeed;
         this.weaponCount = weaponCount;
+        this.wingspan = wingspan;
     }
 
     public Fighter()
@@ -42,6 +42,15 @@ public class Fighter : Airplane
             weaponCount = value;
         }
     }
+    public int Wingspan { 
+        get { return wingspan; }
+        set
+        {
+            if (value <= 0)
+                throw new ArgumentException("Розмах крил має бути більше 0.");
+            wingspan = value;
+        }  
+    }
     
     
     public override string GetDetails()
@@ -53,6 +62,6 @@ public class Fighter : Airplane
 
     public override string ToString()
     {
-        return "Винищувач: " + base.ToString() + $", Макс. швидкість: {maxSpeed} км/год, Озброєння: {weaponCount}";
+        return "Винищувач: " + base.ToString() + $", Розмах крил: {wingspan} м, Макс. швидкість: {maxSpeed} км/год, Озброєння: {weaponCount}";
     }
 }

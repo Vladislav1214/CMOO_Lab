@@ -9,8 +9,8 @@ public class UniversityStudent : Schoolboy
         
     }
 
-    public UniversityStudent(string fullName, string universityName, string studyDirection, int yearOfAdmission, int[] grades)
-        : base(fullName, universityName, "N/A", grades)
+    public UniversityStudent(string fullName, string educationalInstitutionName, string groupName, string studyDirection, int yearOfAdmission, int[] grades)
+        : base(fullName, educationalInstitutionName, groupName, grades)
     {
         this.yearOfAdmission = yearOfAdmission;
         this.studyDirection = studyDirection;
@@ -19,7 +19,12 @@ public class UniversityStudent : Schoolboy
     public int YearOfAdmission
     {
         get { return yearOfAdmission; }
-        set { yearOfAdmission = value; }
+        set
+        {
+            if (value < 1950 || value > DateTime.Now.Year)
+                throw new ArgumentException("Неправильний рік вступу.");
+            yearOfAdmission = value;
+        }
     }
 
     public string? StudyDirection
@@ -42,7 +47,7 @@ public class UniversityStudent : Schoolboy
 
     public override string ToString()
     {
-        return $"Студент: {FullName}, Університет: {SchoolName}, Напрям: {StudyDirection}, Рік вступу: {YearOfAdmission}, Середній бал: {GetAverageGrade():F2}";
+        return $"Студент: {FullName}, Університет: {EducationalInstitutionName}, Група: {GroupName}, Напрям: {StudyDirection}, Рік вступу: {YearOfAdmission}, Середній бал: {GetAverageGrade():F2}";
     }
 
     public override bool Equals(object obj)
@@ -58,6 +63,6 @@ public class UniversityStudent : Schoolboy
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(base.GetHashCode(), yearOfAdmission, studyDirection);
+        return HashCode.Combine(base.GetHashCode(), YearOfAdmission, StudyDirection);
     }
 }

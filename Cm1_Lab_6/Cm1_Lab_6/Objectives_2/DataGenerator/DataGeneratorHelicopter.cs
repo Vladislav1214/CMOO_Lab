@@ -2,9 +2,9 @@
 
 public class DataGeneratorHelicopter
 {
-    static string[] names = { "Hawk", "Storm", "Comet", "Hornet" };
-    static string[] manufacturers = { "Kamov", "Sikorsky", "Airbus", "Robinson" };
-    static string[] fuelTypes = { "Jet Fuel", "Kerosene", "Diesel" };
+    private static string[] names = { "Hawk", "Storm", "Comet", "Hornet" };
+    private static string[] manufacturers = { "Kamov", "Sikorsky", "Airbus", "Robinson" };
+    private static string[] fuelTypes = { "Kerosene", "Diesel" };
 
     public static Helicopter GenerateRandomHelicopter()
     {
@@ -17,8 +17,8 @@ public class DataGeneratorHelicopter
         int flightRange = DataGeneratorAircraft.rand.Next(300, 600);
         int crewCount = DataGeneratorAircraft.rand.Next(1, 3);
         int payload = DataGeneratorAircraft.rand.Next(1000, 4000);
-        int rotors = DataGeneratorAircraft.rand.Next(1, 3);
+        int rotorCount = DataGeneratorAircraft.rand.Next(1, 3);
 
-        return new Helicopter(name, year, maxAltitude, manufacturer, flightRange, crewCount, payload, fuelType, rotors);
+        return new Helicopter(name, year, maxAltitude, manufacturer, flightRange, crewCount, payload, fuelType, rotorCount);
     }
 }

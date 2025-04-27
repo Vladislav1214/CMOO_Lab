@@ -3,9 +3,9 @@
 public class DataGeneratorAirplane
 {
 
-    static string[] names = { "Eagle", "Falcon", "SkyJet", "WindRider" };
-    static string[] manufacturers = { "Boeing", "Airbus", "Antonov", "Tupolev" };
-    static string[] fuelTypes = { "Jet Fuel", "Kerosene", "Electric" };
+    private static string[] names = { "Eagle", "Falcon", "SkyJet", "WindRider" };
+    private static string[] manufacturers = { "Boeing", "Airbus", "Antonov", "Tupolev" };
+    private static string[] fuelTypes = { "Kerosene", "Electric", "Petrol"};
 
     public static Airplane GenerateRandomAirplane()
     {
@@ -19,8 +19,8 @@ public class DataGeneratorAirplane
         int crewCount = DataGeneratorAircraft.rand.Next(2, 6);
         int payload = DataGeneratorAircraft.rand.Next(10000, 20000);
         int wingspan = DataGeneratorAircraft.rand.Next(20, 40);
-        int passengers = DataGeneratorAircraft.rand.Next(100, 300);
+        int passengerCapacity = DataGeneratorAircraft.rand.Next(100, 300);
 
-        return new Airplane(name, year, maxAltitude, manufacturer, flightRange, crewCount, payload, fuelType, wingspan, passengers);
+        return new Airplane(name, year, maxAltitude, manufacturer, flightRange, crewCount, payload, fuelType, wingspan, passengerCapacity);
     }
 }
