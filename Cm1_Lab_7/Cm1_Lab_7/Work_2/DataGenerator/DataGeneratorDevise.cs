@@ -5,13 +5,13 @@ public abstract class DataGeneratorDevice
     protected Random random;
     
     // Словники з можливими значеннями для рандомізації
-    protected static readonly string[] MaterialOptions = { "Алюміній", "Карбон", "Титан", "Сталь", "Композит", "Дерево", "Нейлон", "Дакрон", "Шовк" };
-    protected static readonly string[] EngineTypes = { "Турбореактивний", "Газотурбінний", "Поршневий", "Електричний", "Гібридний" };
-    protected static readonly string[] PartNames = { "Крило", "Корпус", "Шасі", "Гвинт", "Двигун", "Оболонка", "Стабілізатор", "Кабіна", "Хвіст" };
+    protected static string[] MaterialOptions = { "Алюміній", "Карбон", "Титан", "Сталь", "Композит", "Дерево", "Нейлон", "Дакрон", "Шовк" };
+    protected static string[] EngineTypes = { "Турбореактивний", "Газотурбінний", "Поршневий", "Електричний", "Гібридний" };
+    protected static string[] PartNames = { "Крило", "Корпус", "Шасі", "Гвинт", "Двигун", "Оболонка", "Стабілізатор", "Кабіна", "Хвіст" };
     
     // Масиви префіксів та суфіксів для генерації імен
-    protected static readonly string[] NamePrefixes = { "Небесний", "Швидкий", "Легкий", "Повітряний", "Сучасний", "Комфортний", "Потужний" };
-    protected static readonly string[] NameSuffixes = { "Сокіл", "Орел", "Яструб", "Стріла", "Хмара", "Вітер", "Блискавка", "Промінь" };
+    protected static string[] NamePrefixes = { "Небесний", "Швидкий", "Легкий", "Повітряний", "Сучасний", "Комфортний", "Потужний" };
+    protected static string[] NameSuffixes = { "Сокіл", "Орел", "Яструб", "Стріла", "Хмара", "Вітер", "Блискавка", "Промінь" };
     
     public DataGeneratorDevice()
     {

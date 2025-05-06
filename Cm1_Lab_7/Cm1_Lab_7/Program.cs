@@ -9,9 +9,14 @@ class Program
         bool flag = true;
         while (flag)
         {
-            Console.Clear();
             
-            Console.WriteLine(" ");
+            Console.WriteLine("\n=== Головне меню ===");
+            Console.WriteLine("1. Робота з предметами (Syllabus)");
+            Console.WriteLine("2. Робота з реєстром літальних апаратів (Registry)");
+            Console.WriteLine("3. Робота з шифруванням (ACipher, BCipher)");
+            Console.WriteLine("4. Генерація випадкових літальних апаратів і взаємодія");
+            Console.WriteLine("0. Вихід");
+            Console.Write("Ваш вибір: ");
             
             switch (Convert.ToInt32(Console.ReadLine()))
             {
@@ -152,7 +157,7 @@ class Program
                 case 3:
                 {
                     // Тестовий рядок
-                    string testString = "Hello World!";
+                    string testString = "Hello World! Тестування";
                     Console.WriteLine($"Оригінальний рядок: {testString}");
 
                     // Тестування ACipher
@@ -238,8 +243,8 @@ class Program
                         Console.WriteLine("6. Сортувати за назвою");
                         Console.WriteLine("7. Додати новий випадковий пристрій");
                         Console.WriteLine("0. Вихід");
-
                         Console.Write("\nВаш вибір: ");
+                        
                         string choice = Console.ReadLine();
 
                         Console.WriteLine();
@@ -292,7 +297,7 @@ class Program
                             case "0":
                             {
                                 exit = true;
-                                Console.WriteLine("Дякуємо за використання програми!");
+                                Console.WriteLine("Завершення роботи програми.");
                                 break;
                             }
                             default:
@@ -300,23 +305,21 @@ class Program
                                 break;
                         }
                     }
+                    break;
+                }
+                case 0:
+                {
                     flag = false;
+                    Console.WriteLine("Завершення роботи програми...");
                     break;
                 }
                 default:
-                    Console.WriteLine("Невідома команда. Спробуйте ще раз.");
-                    flag = true;
+                    Console.WriteLine("Невірний вибір. Спробуйте ще раз.");
                     break;
             }
-
-            if (!flag)
-            {
-                Console.Write("Продовжити(1) Завершити(0): ");
-                if (Convert.ToInt32(Console.ReadLine()) == 1)
-                {
-                    flag = true;
-                }
-            }
+            
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

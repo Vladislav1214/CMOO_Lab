@@ -5,6 +5,16 @@ namespace Cm1_Lab_7;
 // Клас шифрування через заміну кожної літери на літеру, розташовану на тій же позиції з кінця алфавіту
 public class BCipher : ICipher
 {
+    private const string AlphabetLowerUkr = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+    private const string AlphabetUpperUkr = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ";
+    private const string AlphabetLowerEng = "abcdefghijklmnopqrstuvwxyz";
+    private const string AlphabetUpperEng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    private char MirrorChar(string arr, char c)
+    {
+        return arr[arr.Length - 1 - arr.IndexOf(c)];
+    }
+
     public string Encode(string text)
     {
         if (string.IsNullOrEmpty(text))
@@ -16,22 +26,24 @@ public class BCipher : ICipher
         {
             char encoded = c;
             
-            if (char.IsLetter(c))
+            if (char.IsUpper(c))
             {
-                if (char.IsUpper(c))
-                {
-                    // Літери верхнього регістру (A-Z: 65-90)
-                    encoded = (char)('A' + ('Z' - c)); // Заміна A->Z, B->Y, C->X і т.д.
-                }
-                else
-                {
-                    // Літери нижнього регістру (a-z: 97-122)
-                    encoded = (char)('a' + ('z' - c)); // Заміна a->z, b->y, c->x і т.д.
-                }
+                if (AlphabetUpperUkr.Contains(c))
+                    encoded = MirrorChar(AlphabetUpperUkr, c);
+                else if (AlphabetUpperEng.Contains(c))
+                    encoded = MirrorChar(AlphabetUpperEng, c);
+            }
+            else if (char.IsLower(c))
+            {
+                if (AlphabetLowerUkr.Contains(c))
+                    encoded = MirrorChar(AlphabetLowerUkr, c);
+                else if (AlphabetLowerEng.Contains(c))
+                    encoded = MirrorChar(AlphabetLowerEng, c);
             }
             
             result.Append(encoded);
         }
+        
         
         return result.ToString();
     }
@@ -40,8 +52,7 @@ public class BCipher : ICipher
     {
         if (string.IsNullOrEmpty(text))
             return text;
-
-        // Для цього шифру операція дешифрування ідентична операції шифрування
+        
         return Encode(text);
     }
 }

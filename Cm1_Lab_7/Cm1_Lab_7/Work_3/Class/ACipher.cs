@@ -5,34 +5,52 @@ namespace Cm1_Lab_7;
 // Клас шифрування через зсув кожного символу на одну позицію вище
 public class ACipher : ICipher
 {
+    private const string AlphabetLowerUkr = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+    private const string AlphabetUpperUkr = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ";
+    private const string AlphabetLowerEng = "abcdefghijklmnopqrstuvwxyz";
+    private const string AlphabetUpperEng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    private char EcodeFun(string arr, char c)
+    {
+        int index = arr.IndexOf(c);
+        return arr[(index + 1) % arr.Length];;
+    }
+    
+    private char DecodeFun(string arr, char c)
+    {
+        int index = arr.IndexOf(c);
+        return arr[(index - 1 + arr.Length) % arr.Length];;
+    }
+    
     public string Encode(string text)
     {
         if (string.IsNullOrEmpty(text))
             return text;
 
         StringBuilder result = new StringBuilder();
-
+        
         foreach (char c in text)
         {
             char encoded = c;
-
-            if (char.IsLetter(c))
+            
+            if (char.IsUpper(c))
             {
-                if (char.IsUpper(c))
-                {
-                    // Літери верхнього регістру (A-Z: 65-90)
-                    encoded = (char)((c - 65 + 1) % 26 + 65);
-                }
-                else
-                {
-                    // Літери нижнього регістру (a-z: 97-122)
-                    encoded = (char)((c - 97 + 1) % 26 + 97);
-                }
+                if (AlphabetUpperUkr.Contains(c))
+                    encoded = EcodeFun(AlphabetUpperUkr, c);
+                else if (AlphabetUpperEng.Contains(c))
+                    encoded = EcodeFun(AlphabetUpperEng, c);
             }
-
+            else if (char.IsLower(c))
+            {
+                if (AlphabetLowerUkr.Contains(c))
+                    encoded = EcodeFun(AlphabetLowerUkr, c);
+                else if (AlphabetLowerEng.Contains(c))
+                    encoded = EcodeFun(AlphabetLowerEng, c);
+            }
+            
             result.Append(encoded);
         }
-
+        
         return result.ToString();
     }
 
@@ -40,30 +58,31 @@ public class ACipher : ICipher
     {
         if (string.IsNullOrEmpty(text))
             return text;
-
+        
         StringBuilder result = new StringBuilder();
-
+        
         foreach (char c in text)
         {
-            char decoded = c;
-
-            if (char.IsLetter(c))
+            char dencoded = c;
+            
+            if (char.IsUpper(c))
             {
-                if (char.IsUpper(c))
-                {
-                    // Літери верхнього регістру (A-Z: 65-90)
-                    decoded = (char)((c - 65 + 25) % 26 + 65); // +25 еквівалентно -1 по модулю 26
-                }
-                else
-                {
-                    // Літери нижнього регістру (a-z: 97-122)
-                    decoded = (char)((c - 97 + 25) % 26 + 97); // +25 еквівалентно -1 по модулю 26
-                }
+                if (AlphabetUpperUkr.Contains(c))
+                    dencoded = DecodeFun(AlphabetUpperUkr, c);
+                else if (AlphabetUpperEng.Contains(c))
+                    dencoded = DecodeFun(AlphabetUpperEng, c);
             }
-
-            result.Append(decoded);
+            else if (char.IsLower(c))
+            {
+                if (AlphabetLowerUkr.Contains(c))
+                    dencoded = DecodeFun(AlphabetLowerUkr, c);
+                else if (AlphabetLowerEng.Contains(c))
+                    dencoded = DecodeFun(AlphabetLowerEng, c);
+            }
+            
+            result.Append(dencoded);
         }
-
+        
         return result.ToString();
     }
 }        

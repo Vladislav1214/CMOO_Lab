@@ -32,17 +32,17 @@ public class Person : IComparable, ICloneable
             throw new ArgumentException("Object is not a Person");
 
         // Порівнюємо за прізвищем
-        int lastNameComparison = this.LastName.CompareTo(pers.LastName);
+        int lastNameComparison = LastName.CompareTo(pers.LastName);
         if (lastNameComparison != 0)
             return lastNameComparison;
 
         // Якщо прізвища однакові, порівнюємо за іменем
-        int firstNameComparison = this.FirstName.CompareTo(pers.FirstName);
+        int firstNameComparison = FirstName.CompareTo(pers.FirstName);
         if (firstNameComparison != 0)
             return firstNameComparison;
 
         // Якщо імена однакові, порівнюємо за датою народження
-        return this.BirthDate.CompareTo(pers.BirthDate);
+        return BirthDate.CompareTo(pers.BirthDate);
     }
     
     public Object Clone()
