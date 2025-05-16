@@ -145,7 +145,7 @@ public class Program
         while (submenu)
         {
             Console.Clear();
-            Console.WriteLine("=== Меню дій ===");
+            Console.WriteLine("Меню дій");
             Console.WriteLine("1 – Поточний час");
             Console.WriteLine("2 – Поточна дата");
             Console.WriteLine("3 – День тижня");
@@ -193,7 +193,6 @@ public class Program
 
             Console.WriteLine("Продовження (Enter)");
             Console.ReadKey();
-            Console.Clear();
         }
     }
 
@@ -211,7 +210,8 @@ public class Program
         bool submenu = true;
         while (submenu)
         {
-            Console.WriteLine("=== Меню взаємодії з валізою ===");
+            Console.Clear();
+            Console.WriteLine("Меню взаємодії з валізою");
             Console.WriteLine("1 – Додати предмет випадково");
             Console.WriteLine("2 – Додати предмет вручну");
             Console.WriteLine("3 – Видалити предмет за індексом");
@@ -258,7 +258,7 @@ public class Program
                 }
                 case 3:
                 {
-                    if (suitcase.Items.Count == 0)
+                    if (suitcase.Items.Length == 0)
                     {
                         Console.WriteLine("Валіза порожня.");
                         break;
@@ -269,10 +269,8 @@ public class Program
                     {
                         Console.WriteLine("Невірний індекс.");
                     }
-
                     break;
                 }
-                
                 case 4:
                 {
                     try
@@ -292,17 +290,24 @@ public class Program
                 }
                 case 5:
                 {
-                    Console.WriteLine("Вміст валізи:");
-                    foreach (var item in suitcase.Items)
+                    if (suitcase.Items.Length != 0)
                     {
-                        Console.WriteLine($"- {item}");
+                        Console.WriteLine("Вміст валізи:");
+                        int count = 0;
+                        foreach (var item in suitcase.Items)
+                        {
+                            Console.WriteLine($"[{count++}] - {item}");
+                        }
                     }
-
+                    else
+                        Console.WriteLine("Валіза пуста");
+                    
                     break;
                 }
                 case 6:
                 {
-                    suitcase.Clear();
+                    if (suitcase.Items.Length != 0)
+                        suitcase.Clear();
                     Console.WriteLine("Валізу очищено.");
                     break;
                 }
@@ -321,22 +326,19 @@ public class Program
                     Console.WriteLine("Невірний вибір");
                     break;
             }
-
             Console.WriteLine("Продовження (Enter)");
             Console.ReadKey();
-            Console.Clear();
         }
-
     }
-
-
+    
     static void RunArrayAndTextAnalysisMenu()
     {
         Console.Clear();
         bool submenu = true;
         while (submenu)
         {
-            Console.WriteLine("\nОберіть дію:");
+            Console.Clear();
+            Console.WriteLine("Меню дій");
             Console.WriteLine("1 - Підрахунок чисел, кратних 7");
             Console.WriteLine("2 - Підрахунок позитивних чисел");
             Console.WriteLine("3 - Чи сьогодні день програміста");
@@ -400,12 +402,9 @@ public class Program
 
             Console.WriteLine("Продовження (Enter)");
             Console.ReadKey();
-            Console.Clear();
         }
     }
     
-
-
     static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -413,7 +412,7 @@ public class Program
         bool mainLoop = true;
         while (mainLoop)
         {
-            Console.WriteLine("==== Головне меню ====");
+            Console.WriteLine("Головне меню");
             Console.WriteLine("1 – Робота з датою/часом та обчисленнями");
             Console.WriteLine("2 – Робота з валізою");
             Console.WriteLine("3 – Робота з масивами, словами та перевірками");

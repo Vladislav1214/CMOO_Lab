@@ -2,21 +2,21 @@
 
 public class Item
 {
-    string? _name;
-    public double Volume { get; set; }
+    string _name;
+    double _volume;
 
+    
+    public Item() { }
+    
     public Item(string name, double volume)
     {
         _name = name;
-        Volume = volume;
+        _volume = volume;
     }
 
     public string Name
     {
-        get 
-        {
-            return _name ?? "NoName";
-        }
+        get { return _name ?? "NoName"; }
         set
         {
             if (!string.IsNullOrWhiteSpace(value))
@@ -24,9 +24,10 @@ public class Item
         }
     }
 
-    public Item()
+    public double Volume
     {
-        
+        get { return _volume; }
+        set { _volume = value;}
     }
 
     public override string ToString() => $"{Name} ({Volume} л)";

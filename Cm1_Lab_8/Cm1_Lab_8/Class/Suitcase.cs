@@ -6,7 +6,7 @@ public class Suitcase
    public string? Brand { get; set; }
    public double Weight { get; set; }
    public double MaxVolume { get; set; }
-   public List<Item> Items { get; private set; }
+   private Item[] _items;
    
    public event Action<Item>? ItemAdded;
    public event Action<Item>? ItemRemoved;
@@ -17,42 +17,63 @@ public class Suitcase
       Brand = brand;
       Weight = weight;
       MaxVolume = maxVolume;
-      Items = new List<Item>();
+      _items = new Item[0];
    }
 
    public Suitcase()
    {
-      Items = new List<Item>();
+      _items = new Item[0];
    }
    
    public double ItemsVolume =>
-      Items.Sum(i => i.Volume);
+      _items.Sum(i => i.Volume);
    
    public void AddItem(Item item)
    {
       if (ItemsVolume + item.Volume > MaxVolume)
          throw new VolumeExceededException($"Не можна додати '{item.Name}': об'єм перевищено.");
-
-      Items.Add(item);
+      
+      int newLength = _items.Length + 1;
+      Array.Resize(ref _items, newLength);
+      _items[newLength - 1] = item;
+      
       ItemAdded?.Invoke(item);
    }
    
    public bool RemoveItemByIndex(int index)
    {
-      if (index >= 0 && index < Items.Count)
+      if (index >= 0 && index < _items.Length)
       {
-         Item removedItem = Items[index];
-         Items.RemoveAt(index);
-         ItemRemoved?.Invoke(removedItem); // <- Подія викликається тут
+         Item removedItem = _items[index];
+         
+         Item[] result = new Item[_items.Length - 1];
+
+         if (index > 0)
+            Array.Copy(_items, 0, result, 0, index);
+         
+         if (index < _items.Length - 1)
+            Array.Copy(_items, index + 1, result, index, _items.Length - index - 1);
+         
+         _items = result;
+         
+         ItemRemoved?.Invoke(removedItem);
          return true;
       }
       return false;
    }
+   
 
+   public Item[] Items
+   {
+      get
+      {
+         return _items;
+      }
+   }
 
    public void Clear()
    {
-      Items.Clear();
+      _items = new Item[0];
    }
    
    public override string ToString()
