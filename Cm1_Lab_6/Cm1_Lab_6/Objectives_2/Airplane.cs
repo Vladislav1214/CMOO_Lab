@@ -41,13 +41,13 @@ public class Airplane : Aircraft
 
     public override string GetDetails()
     {
-       return $"Літак: {Name}, Рік: {Year}, Виробник: {Manufacturer}, Розмах крил: {wingspan} м, " +
+       return $"Літак: {Name}, Рік: {Year}, Виробник: {Manufacturer}, Розмах крил: {Wingspan} м, " +
             $"Пасажиромісткість: {passengerCapacity}, Дальність: {FlightRange} км, Екіпаж: {CrewCount}, " +
             $"Вантажопідйомність: {PayloadCapacity} кг, Макс. висота: {MaxAltitude} м, Паливо: {FuelType}";
     }
 
     public override string ToString()
     {
-       return "Літак: " + base.ToString() + $", Розмах крил: {wingspan} м, Пасажиромісткість: {passengerCapacity}";
+       return "Літак: " + base.ToString() + $", Розмах крил: {Wingspan} м, Пасажиромісткість: {PassengerCapacity}";
     }
 }

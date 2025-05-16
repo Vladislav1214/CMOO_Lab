@@ -11,22 +11,27 @@ class Program
         bool flag = true;
         while (flag)
         {
-            int CrewCount = int.Parse(Console.ReadLine());
+            Console.WriteLine("Головне меню");
+            Console.WriteLine("Преше завдання (1)");
+            Console.WriteLine("Дреге завдання (2)");
+            Console.WriteLine("Вихід (0)");
+            Console.Write("Ваш вибір: ");
             
-            switch (CrewCount)
+            int crewCount = Convert.ToInt32(Console.ReadLine());
+            
+            switch (crewCount)
             {
                 case (1):
                 {
-
                     try
                     {
-                        var schoolboys = new List<Schoolboy>
+                        Schoolboy[] schoolboys =
                         {
                             DataGeneratorSchoolboy.GenerateRandomSchoolboy(),
                             DataGeneratorSchoolboy.GenerateRandomSchoolboy()
                         };
 
-                        var students = new List<UniversityStudent>
+                        UniversityStudent[] students =
                         {
                             DataGeneratorUniversityStudent.GenerateRandomUniversityStudent(),
                             DataGeneratorUniversityStudent.GenerateRandomUniversityStudent()
@@ -48,15 +53,14 @@ class Program
                     {
                         Console.WriteLine($"Сталася помилка: {ex.Message}");
                     }
-
-                    flag = false;
+                    
                     break;
                 }
                 case (2):
                 {
                     try
                     {
-                        List<Aircraft> aircrafts = new List<Aircraft>
+                        Aircraft[] aircrafts =
                         {
                             DataGeneratorAircraft.GenerateRandomAircraft(),
                             DataGeneratorAircraft.GenerateRandomAircraft(),
@@ -64,19 +68,14 @@ class Program
                             DataGeneratorAircraft.GenerateRandomAircraft()
                         };
 
-                        // Створення військової бази
-                        MilitaryBase base1 = new MilitaryBase();
+                        MilitaryBase base1 = new MilitaryBase(aircrafts);
 
-                        foreach (var aircraft in aircrafts)
-                        {
-                            base1.AddAircraft(aircraft);
-                        }
+                        base1.AddAircrafts(DataGeneratorAircraft.GenerateRandomAircraft());
 
                         base1.DisplayAircraftCount();
 
                         Console.WriteLine("\nІнформація про літальні апарати на базі:");
                         base1.DisplayDetailedInfo();
-
                     }
                     catch (ArgumentException ex)
                     {
@@ -86,17 +85,19 @@ class Program
                     {
                         Console.WriteLine($"Сталася помилка при обробці літальних апаратів: {ex.Message}");
                     }
-                    
+                    break;
+                }
+                case (0):
+                {
+                    Console.WriteLine("Завершення програми");
                     flag = false;
                     break;
                 }
-            }
-
-            if (flag == false)
-            {
-                Console.Write("Бажаєте продовжити? Так(1) Ні(0): ");
-                int inflag = int.Parse(Console.ReadLine());
-                if (inflag == 1) flag = true;
+                default:
+                {
+                    Console.WriteLine("Невірний вибір");
+                    break;
+                }
             }
         }
     }

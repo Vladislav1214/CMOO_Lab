@@ -56,12 +56,12 @@ public class Fighter : Aircraft
     public override string GetDetails()
     {
         return $"Винищувач: {Name}, Рік: {Year}, Виробник: {Manufacturer}, Розмах крил: {Wingspan} м, " +
-               $"Макс. швидкість: {maxSpeed} км/год, Озброєння: {weaponCount}, Дальність: {FlightRange} км, " +
+               $"Макс. швидкість: {MaxSpeed} км/год, Озброєння: {WeaponCount}, Дальність: {FlightRange} км, " +
                $"Екіпаж: {CrewCount}, Вантажопідйомність: {PayloadCapacity} кг, Макс. висота: {MaxAltitude} м, Паливо: {FuelType}";
     }
 
     public override string ToString()
     {
-        return "Винищувач: " + base.ToString() + $", Розмах крил: {wingspan} м, Макс. швидкість: {maxSpeed} км/год, Озброєння: {weaponCount}";
+        return "Винищувач: " + base.ToString() + $", Розмах крил: {Wingspan} м, Макс. швидкість: {MaxSpeed} км/год, Озброєння: {WeaponCount}";
     }
 }

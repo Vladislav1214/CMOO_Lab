@@ -29,12 +29,12 @@ public class Drone : Aircraft
     public override string GetDetails()
     {
         return $"Дрон: {Name}, Рік: {Year}, Виробник: {Manufacturer}, Дальність: {FlightRange} км, " + 
-               $"Камера: {(hasCamera ? "Так" : "Ні")}, Екіпаж: {CrewCount}, Вантажопідйомність: {PayloadCapacity} кг, " + 
+               $"Камера: {(HasCamera ? "Так" : "Ні")}, Екіпаж: {CrewCount}, Вантажопідйомність: {PayloadCapacity} кг, " + 
                $"Макс. висота: {MaxAltitude} м, Паливо: {FuelType}";
     }
 
     public override string ToString()
     {
-        return "Дрон: " + base.ToString() + $", Камера: {(hasCamera ? "Так" : "Ні")}";
+        return "Дрон: " + base.ToString() + $", Камера: {(HasCamera ? "Так" : "Ні")}";
     }
 }

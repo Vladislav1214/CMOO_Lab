@@ -2,27 +2,33 @@
 
 public class MilitaryBase
 {
-    private List<Aircraft> aircrafts = new List<Aircraft>();
+    private Aircraft[] aircrafts;
 
-    public void AddAircraft(Aircraft aircraft)
+    public MilitaryBase(Aircraft[] aircraft)
     {
-        aircrafts.Add(aircraft);
+        aircrafts = aircraft;
     }
-
-    public void RemoveAircraft(Aircraft aircraft)
+    
+    public void AddAircrafts(params Aircraft[] newAircrafts)
     {
-        aircrafts.Remove(aircraft);
+        if (newAircrafts != null && newAircrafts.Length != 0)
+        {
+            int oldLength = aircrafts.Length;
+            Array.Resize(ref aircrafts, oldLength + newAircrafts.Length);
+            for (int i = 0; i < newAircrafts.Length; i++)
+                aircrafts[oldLength + i] = newAircrafts[i];
+        }
     }
 
     public void DisplayAircraftCount()
     {
-        if (aircrafts.Count == 0)
+        if (aircrafts.Length== 0)
         {
             Console.WriteLine("На базі відсутні літальні апарати.");
             return;
         }
 
-        Console.WriteLine($"Кількісний склад літальних апаратів: {aircrafts.Count}");
+        Console.WriteLine($"Кількісний склад літальних апаратів: {aircrafts.Length}");
         Console.WriteLine("За типами:");
         var grouped = aircrafts.GroupBy(a => a.GetType().Name);
         foreach (var group in grouped)
@@ -33,7 +39,7 @@ public class MilitaryBase
 
     public void DisplayDetailedInfo()
     {
-        if (aircrafts.Count == 0)
+        if (aircrafts.Length == 0)
         {
             Console.WriteLine("На базі відсутні літальні апарати.");
             return;

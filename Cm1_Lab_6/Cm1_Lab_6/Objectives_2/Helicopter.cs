@@ -31,6 +31,6 @@ public class Helicopter : Aircraft
 
     public override string ToString()
     {
-       return "Вертоліт: " + base.ToString() + $", Ротори: {rotorCount}";
+       return "Вертоліт: " + base.ToString() + $", Ротори: {RotorCount}";
     }
 }

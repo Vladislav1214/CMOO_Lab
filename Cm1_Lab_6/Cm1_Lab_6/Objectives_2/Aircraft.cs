@@ -123,6 +123,6 @@ public abstract class Aircraft
     public abstract string GetDetails();
 
     public override string ToString() => 
-        $"Назва: {name?? "NoName"}, Виробник: {manufacturer ?? "NoManufacturer"}, Рік: {year}, Макс. висота: {maxAltitude} м, " +
-        $"Дальність: {flightRange} км, Екіпаж: {crewCount}, Вантажопідйомність: {payloadCapacity} кг, Паливо: {fuelType?? "NoFuelType"}";
+        $"Назва: {Name}, Виробник: {Manufacturer}, Рік: {Year}, Макс. висота: {MaxAltitude} м, " +
+        $"Дальність: {FlightRange} км, Екіпаж: {CrewCount}, Вантажопідйомність: {PayloadCapacity} кг, Паливо: {FuelType}";
 }

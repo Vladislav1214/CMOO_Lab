@@ -42,7 +42,7 @@ public class UniversityStudent : Schoolboy
     {
         // Підвищений коефіцієнт (приклад роботи віртуального методу)
         double baseAverage = base.GetAverageGrade();
-        return baseAverage + 0.1; // Наприклад, бонус за складність
+        return baseAverage + 0.1;
     }
 
     public override string ToString()
