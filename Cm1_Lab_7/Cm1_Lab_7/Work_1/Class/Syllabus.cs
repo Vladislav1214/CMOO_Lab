@@ -366,8 +366,6 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         syllabus.Subjects = tempSubjects;
     }
     
-    
-    
     public override string ToString()
     {
         string result = $"Автор: {Author}\nФорма навчання: {DegreeForm}\nШифр спеціальності: {SpecialityCode}\nСписок предметів:";

@@ -14,7 +14,6 @@ class Program
             Console.WriteLine("1. Робота з предметами (Syllabus)");
             Console.WriteLine("2. Робота з реєстром літальних апаратів (Registry)");
             Console.WriteLine("3. Робота з шифруванням (ACipher, BCipher)");
-            Console.WriteLine("4. Генерація випадкових літальних апаратів і взаємодія");
             Console.WriteLine("0. Вихід");
             Console.Write("Ваш вибір: ");
             
@@ -108,55 +107,104 @@ class Program
                 {
                     Registry registry = new Registry();
                     
-                    registry.AddDevice(new Airplane("Boeing 737", 2015, 850, true,
-                        27300, "Турбореактивний", 189, "Крило", "Алюміній"));
+                    DataGeneratorRandomDevice generator = new DataGeneratorRandomDevice();
 
-                    registry.AddDevice(new Helicopter("Bell 429", 2018, 287, true,
-                        1100, "Газотурбінний", 4, "Несний гвинт", "Карбон"));
-
-                    registry.AddDevice(new HotAirBalloon("Cameron Z-90", 2020, 25, false,
-                        2550, "Оболонка", "Нейлон"));
-
-                    registry.AddDevice(new Deltaplane("Wills Wing T3", 2022, 100, false,
-                        14.8, "Крило", "Дакрон"));
-
-                    registry.AddDevice(new FlyingCarpet("Килим-Самоліт", 1001, 120, false,
-                        3.0, 2.0, "Основа", "Шовк"));
-
-                    // Демонстрація всіх пристроїв
-                    registry.DisplayAllDevices();
-
-                    // Демонстрація електронних пристроїв
-                    registry.DisplayElectronicDevices();
-
-                    // Демонстрація пристроїв без двигунів
-                    registry.DisplayDevicesWithoutEngine();
-
-                    // Сортування за роком виробництва
-                    Console.WriteLine("\n==== СПИСОК ПІСЛЯ СОРТУВАННЯ ЗА РОКОМ ВИРОБНИЦТВА ====");
-                    registry.SortByYear();
-                    registry.DisplayAllDevices();
-
-                    // Сортування за швидкістю
-                    Console.WriteLine("\n==== СПИСОК ПІСЛЯ СОРТУВАННЯ ЗА ШВИДКІСТЮ ====");
-                    registry.SortBySpeed();
-                    registry.DisplayAllDevices();
-
-                    // Демонстрація клонування
-                    Console.WriteLine("\n==== ДЕМОНСТРАЦІЯ КЛОНУВАННЯ ====");
-                    List<Device> copies = registry.GetDeviceCopies();
-                    foreach (Device device in copies)
+                    Console.Write("Вкажіть, скільки випадкових пристроїв створити: ");
+                    int count;
+                    if (!int.TryParse(Console.ReadLine(), out count) || count <= 0)
                     {
-                        Console.WriteLine();
-                        device.DisplayInfo();
+                        count = 10; // Значення за замовчуванням
+                        Console.WriteLine($"Використовуємо значення за замовчуванням: {count} пристроїв");
                     }
-                    
-                    flag = false;
+
+                    // Заповнюємо реєстр випадковими пристроями
+                    generator.FillRegistry(registry, count);
+
+                    bool exit = false;
+                    while (!exit)
+                    {
+                        Console.WriteLine("Оберіть опцію:");
+                        Console.WriteLine("1. Показати всі пристрої");
+                        Console.WriteLine("2. Показати тільки електронні пристрої");
+                        Console.WriteLine("3. Показати пристрої без двигунів");
+                        Console.WriteLine("4. Сортувати за роком виробництва");
+                        Console.WriteLine("5. Сортувати за максимальною швидкістю");
+                        Console.WriteLine("6. Сортувати за назвою");
+                        Console.WriteLine("7. Додати новий випадковий пристрій");
+                        Console.WriteLine("0. Вихід");
+                        Console.Write("Ваш вибір: ");
+                        
+                        switch (Convert.ToInt32(Console.ReadLine()))
+                        {
+                            case 1:
+                            {
+                                registry.DisplayAllDevices();
+                                break;
+                            }
+                            case 2:
+                            {
+                                registry.DisplayElectronicDevices();
+                                break;
+                            }
+                            case 3:
+                            {
+                                registry.DisplayDevicesWithoutEngine();
+                                break;
+                            }
+                            case 4:
+                            {
+                                registry.SortByYear();
+                                Console.WriteLine("Пристрої відсортовано за роком виробництва.");
+                                registry.DisplayAllDevices();
+                                break;
+                            }
+                            case 5:
+                            {
+                                registry.SortBySpeed();
+                                Console.WriteLine("Пристрої відсортовано за максимальною швидкістю.");
+                                registry.DisplayAllDevices();
+                                break;
+                            }
+                            case 6:
+                            {
+                                registry.SortByName();
+                                Console.WriteLine("Пристрої відсортовано за назвою.");
+                                registry.DisplayAllDevices();
+                                break;
+                            }
+                            case 7:
+                            {
+                                Device newDevice = generator.CreateRandomDevice();
+                                registry.AddDevice(newDevice);
+                                Console.WriteLine($"Додано новий пристрій: {newDevice.Name}");
+                                break;
+                            }
+                            case 8:
+                            {
+                                Console.WriteLine("Демонстрація клонування.");
+                                Device[] copies = registry.GetDeviceCopies();
+                                foreach (Device device in copies)
+                                {
+                                    Console.WriteLine();
+                                    device.DisplayInfo();
+                                }
+                                break;
+                            }
+                            case 0:
+                            {
+                                exit = true;
+                                Console.WriteLine("Завершення роботи програми.");
+                                break;
+                            }
+                            default:
+                                Console.WriteLine("Невідома команда. Спробуйте ще раз.");
+                                break;
+                        }
+                    }
                     break;
                 }
                 case 3:
                 {
-                    // Тестовий рядок
                     string testString = "Hello World! Тестування";
                     Console.WriteLine($"Оригінальний рядок: {testString}");
 
@@ -167,8 +215,7 @@ class Program
                     Console.WriteLine($"Зашифрований: {encoded}");
                     string decoded = aCipher.Decode(encoded);
                     Console.WriteLine($"Дешифрований: {decoded}");
-
-                    // Тестування BCipher
+                    
                     Console.WriteLine("\nТестування BCipher (заміна на протилежну літеру в алфавіті):");
                     ICipher bCipher = new BCipher();
                     encoded = bCipher.Encode(testString);
@@ -176,22 +223,20 @@ class Program
                     decoded = bCipher.Decode(encoded);
                     Console.WriteLine($"Дешифрований: {decoded}");
 
-                    // Інтерактивний режим
-                    Console.WriteLine("\n=== Інтерактивний режим ===");
+                    Console.WriteLine("Інтерактивний режим");
                     Console.WriteLine("Виберіть тип шифрування:");
                     Console.WriteLine("1. ACipher (зсув на одну позицію)");
                     Console.WriteLine("2. BCipher (заміна на протилежну літеру в алфавіті)");
 
                     Console.Write("Ваш вибір (1-2): ");
-                    string choice = Console.ReadLine();
-
+                    
                     ICipher cipher = null;
-                    switch (choice)
+                    switch (Convert.ToInt32(Console.ReadLine()))
                     {
-                        case "1":
+                        case 1:
                             cipher = new ACipher();
                             break;
-                        case "2":
+                        case 2:
                             cipher = new BCipher();
                             break;
                         default:
@@ -211,100 +256,6 @@ class Program
 
 
                     flag = false;
-                    break;
-                }
-                case 4:
-                {
-                    Registry registry = new Registry();
-
-                    // Створюємо генератор випадкових пристроїв
-                    DataGeneratorRandomDevice generator = new DataGeneratorRandomDevice();
-
-                    Console.Write("Вкажіть, скільки випадкових пристроїв створити (рекомендовано 5-20): ");
-                    int count;
-                    if (!int.TryParse(Console.ReadLine(), out count) || count <= 0)
-                    {
-                        count = 10; // Значення за замовчуванням
-                        Console.WriteLine($"Використовуємо значення за замовчуванням: {count} пристроїв");
-                    }
-
-                    // Заповнюємо реєстр випадковими пристроями
-                    generator.FillRegistry(registry, count);
-
-                    bool exit = false;
-                    while (!exit)
-                    {
-                        Console.WriteLine("\nОберіть опцію:");
-                        Console.WriteLine("1. Показати всі пристрої");
-                        Console.WriteLine("2. Показати тільки електронні пристрої");
-                        Console.WriteLine("3. Показати пристрої без двигунів");
-                        Console.WriteLine("4. Сортувати за роком виробництва");
-                        Console.WriteLine("5. Сортувати за максимальною швидкістю");
-                        Console.WriteLine("6. Сортувати за назвою");
-                        Console.WriteLine("7. Додати новий випадковий пристрій");
-                        Console.WriteLine("0. Вихід");
-                        Console.Write("\nВаш вибір: ");
-                        
-                        string choice = Console.ReadLine();
-
-                        Console.WriteLine();
-
-                        switch (choice)
-                        {
-                            case "1":
-                            {
-                                registry.DisplayAllDevices();
-                                break;
-                            }
-                            case "2":
-                            {
-                                registry.DisplayElectronicDevices();
-                                break;
-                            }
-                            case "3":
-                            {
-                                registry.DisplayDevicesWithoutEngine();
-                                break;
-                            }
-                            case "4":
-                            {
-                                registry.SortByYear();
-                                Console.WriteLine("Пристрої відсортовано за роком виробництва.");
-                                registry.DisplayAllDevices();
-                                break;
-                            }
-                            case "5":
-                            {
-                                registry.SortBySpeed();
-                                Console.WriteLine("Пристрої відсортовано за максимальною швидкістю.");
-                                registry.DisplayAllDevices();
-                                break;
-                            }
-                            case "6":
-                            {
-                                registry.SortByName();
-                                Console.WriteLine("Пристрої відсортовано за назвою.");
-                                registry.DisplayAllDevices();
-                                break;
-                            }
-                            case "7":
-                            {
-                                Device newDevice = generator.CreateRandomDevice();
-                                registry.AddDevice(newDevice);
-                                Console.WriteLine($"Додано новий пристрій: {newDevice.Name}");
-                                break;
-                            }
-                            case "0":
-                            {
-                                exit = true;
-                                Console.WriteLine("Завершення роботи програми.");
-                                break;
-                            }
-                            default:
-                                Console.WriteLine("Невідома команда. Спробуйте ще раз.");
-                                break;
-                        }
-                    }
                     break;
                 }
                 case 0:

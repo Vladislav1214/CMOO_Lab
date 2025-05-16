@@ -2,78 +2,106 @@
 
 public class Registry
 {
-    private List<Device> devices;
-    
+    private Device[] _devices;
+
+    public Registry(Device[] devices)
+    {
+        _devices = devices;
+    }
+
     public Registry()
     {
-        devices = new List<Device>();
+        _devices = new Device[0];
     }
-    
+
     // Додати пристрій до реєстру
-    public void AddDevice(Device device)
+    public void AddDevice(params Device[] newDevice)
     {
-        devices.Add(device);
+        if (newDevice != null && newDevice.Length != 0)
+        {
+            int oldLength = _devices.Length;
+            Array.Resize(ref _devices, oldLength + newDevice.Length);
+            for (int i = 0; i < newDevice.Length; i++)
+                _devices[oldLength + i] = newDevice[i];
+        }
     }
-    
+
     // Вивести список всього обладнання
     public void DisplayAllDevices()
     {
-        Console.WriteLine("==== Список всього обладнання ====");
-        foreach (var device in devices)
+        if (_devices.Length != 0)
         {
-            device.DisplayInfo();
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine("==== Список всього обладнання ====");
+            foreach (var device in _devices)
+            {
+                device.DisplayInfo();
+                Console.WriteLine("--------------------------------");
+            }
         }
     }
-    
+
     // Вивести список електронного обладнання
     public void DisplayElectronicDevices()
     {
-        Console.WriteLine("==== Список електронного обладнання ====");
-        foreach (var device in devices.Where(d => d.HasElectronics))
+        if (_devices.Length != 0)
         {
-            device.DisplayInfo();
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine("==== Список електронного обладнання ====");
+            foreach (var device in _devices.Where(d => d.HasElectronics))
+            {
+                device.DisplayInfo();
+                Console.WriteLine("--------------------------------");
+            }
         }
     }
-    
+
     // Вивести список обладнання без двигунів
     public void DisplayDevicesWithoutEngine()
     {
-        Console.WriteLine("==== Список обладнання без двигунів ====");
-        foreach (var device in devices.Where(d => !(d is IEngine)))
+        if (_devices.Length != 0)
         {
-            device.DisplayInfo();
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine("==== Список обладнання без двигунів ====");
+            foreach (var device in _devices.Where(d => !(d is IEngine)))
+            {
+                device.DisplayInfo();
+                Console.WriteLine("--------------------------------");
+            }
         }
     }
-    
+
     // Сортування за роком виробництва (використовуючи IComparable)
     public void SortByYear()
     {
-        devices.Sort();
+        if (_devices.Length != 0)
+            Array.Sort(_devices);
     }
-    
+
     // Сортування за швидкістю (використовуючи IComparer)
     public void SortBySpeed()
     {
-        devices.Sort(new SpeedComparer());
+        if (_devices.Length != 0)
+            Array.Sort(_devices, 0, _devices.Length, new SpeedComparer());
     }
-    
+
     // Сортування за назвою (використовуючи IComparer)
     public void SortByName()
     {
-        devices.Sort(new NameComparer());
+        if (_devices.Length != 0)
+            Array.Sort(_devices, 0, _devices.Length, new NameComparer());
     }
-    
+
     // Отримати копії всіх пристроїв
-    public List<Device> GetDeviceCopies()
+    public Device[] GetDeviceCopies()
     {
-        List<Device> copies = new List<Device>();
-        foreach (var device in devices)
+        if (_devices.Length != 0)
         {
-            copies.Add((Device)device.Clone());
+
+            Device[] copies = new Device[_devices.Length];
+            for (int i = 0; i < copies.Length; i++)
+                copies[i] = (Device)_devices[i].Clone();
+
+            return copies;
         }
-        return copies;
+        
+        return new Device[0];
     }
 }

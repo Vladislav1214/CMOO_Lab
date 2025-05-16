@@ -2,12 +2,12 @@
 
 public class DataGeneratorRandomDevice
 {
-    private readonly List<DataGeneratorDevice> factories;
-    private readonly Random random;
+    private readonly DataGeneratorDevice[] _factories;
+    private readonly Random _random;
     
     public DataGeneratorRandomDevice()
     {
-        factories = new List<DataGeneratorDevice>
+        _factories = new DataGeneratorDevice[]
         {
             new DataGeneratorAirplane(),
             new DataGeneratorHelicopter(),
@@ -16,14 +16,14 @@ public class DataGeneratorRandomDevice
             new DataGeneratorFlyingCarpet()
         };
         
-        random = new Random();
+        _random = new Random();
     }
     
     // Створення випадкового пристрою
     public Device CreateRandomDevice()
     {
-        int index = random.Next(factories.Count);
-        return factories[index].CreateDevice();
+        int index = _random.Next(_factories.Length);
+        return _factories[index].CreateDevice();
     }
     
     // Заповнення реєстру вказаною кількістю випадкових пристроїв
