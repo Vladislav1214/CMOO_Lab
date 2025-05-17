@@ -25,8 +25,7 @@ class Program
 
                     Console.WriteLine("Початковий список предметів:");
                     Syllabus.DisplaySyllabus(syllabus);
-
-                    // Додаємо нові предмети
+                    
                     syllabus.Add(DataGeneratorSubject.GenerateRandomSubject());
                     syllabus.Add(DataGeneratorSubject.GenerateRandomSubject());
 

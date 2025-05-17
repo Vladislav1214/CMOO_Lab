@@ -83,15 +83,13 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         }
         
         if (index == -1)
-            return; // Елемент не знайдено
+            return;
         
         Subject[] newSubjects = new Subject[_subjects.Length - 1];
-        
-        // Копіюємо елементи до індексу
+
         for (int i = 0; i < index; i++)
             newSubjects[i] = _subjects[i];
         
-        // Копіюємо елементи після індексу
         for (int i = index + 1; i < _subjects.Length; i++)
             newSubjects[i - 1] = _subjects[i];
         
@@ -109,13 +107,11 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         {
             using (StreamWriter writer = new StreamWriter(fileName))
             {
-                // Записуємо основну інформацію
                 writer.WriteLine($"{_author.FirstName},{_author.LastName},{_author.BirthDate.ToString("dd.MM.yyyy")}");
                 writer.WriteLine(_degreeForm);
                 writer.WriteLine(_specialityCode);
                 writer.WriteLine(_subjects.Length);
                 
-                // Записуємо інформацію про предмети
                 foreach (var subject in _subjects)
                 {
                     writer.WriteLine($"{subject.Name},{subject.Hours},{subject.ExamDate.ToString("dd.MM.yyyy")}");
@@ -144,7 +140,6 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         {
             using (StreamReader reader = new StreamReader(fileName))
             {
-                // Читаємо основну інформацію
                 string[] authorInfo = reader.ReadLine().Split(',');
                 _author = new Person(
                     authorInfo[0],
@@ -158,7 +153,6 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
                 int count = int.Parse(reader.ReadLine());
                 _subjects = new Subject[count];
                 
-                // Читаємо інформацію про предмети
                 for (int i = 0; i < count; i++)
                 {
                     string[] subjectInfo = reader.ReadLine().Split(',');
@@ -315,17 +309,14 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         if (count <= 0)
             throw new ArgumentException("Кількість елементів повинна бути більше 0", nameof(count));
         
-        // Визначимо скільки елементів можемо скопіювати
         int actualCount = Math.Min(count, source.Count);
         Subject[] newSubjects = new Subject[actualCount];
         
         for (int i = 0; i < actualCount; i++)
         {
-            // Клонуємо об'єкт, щоб уникнути спільних посилань
             newSubjects[i] = (Subject)((Subject)source[i]).Clone();
         }
         
-        // Створюємо новий Syllabus з копіями елементів
         return new Syllabus(
             (Person)source.Author.Clone(), 
             source.DegreeForm, 
@@ -352,17 +343,13 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
     // Метод для сортування предметів у Syllabus
     public static void SortSyllabus(Syllabus syllabus)
     {
-        // Створюємо тимчасовий масив для сортування
         Subject[] tempSubjects = new Subject[syllabus.Count];
         for (int i = 0; i < syllabus.Count; i++)
         {
             tempSubjects[i] = (Subject)syllabus.Subjects[i].Clone();
         }
-
-        // Сортуємо масив
+        
         Array.Sort(tempSubjects);
-
-        // Оновлюємо Syllabus відсортованими елементами
         syllabus.Subjects = tempSubjects;
     }
     
