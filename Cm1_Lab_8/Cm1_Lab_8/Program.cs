@@ -214,7 +214,7 @@ public class Program
             Console.WriteLine("Меню взаємодії з валізою");
             Console.WriteLine("1 – Додати предмет випадково");
             Console.WriteLine("2 – Додати предмет вручну");
-            Console.WriteLine("3 – Видалити предмет за індексом");
+            Console.WriteLine("3 – Видалити предмет за номером");
             Console.WriteLine("4 – Додати випадкові предмети (до заповнення)");
             Console.WriteLine("5 – Переглянути вміст валізи");
             Console.WriteLine("6 – Очистити валізу");
@@ -258,16 +258,16 @@ public class Program
                 }
                 case 3:
                 {
-                    if (suitcase.Items.Length == 0)
+                    if (suitcase.Count == 0)
                     {
                         Console.WriteLine("Валіза порожня.");
                         break;
                     }
-                    Console.Write("Введіть індекс предмета для видалення: ");
-                    int index = CheckingForANumberIn();
+                    Console.Write("Введіть номер предмета для видалення: ");
+                    int index = CheckingForANumberIn() - 1;
                     if (!suitcase.RemoveItemByIndex(index))
                     {
-                        Console.WriteLine("Невірний індекс.");
+                        Console.WriteLine("Невірний номер.");
                     }
                     break;
                 }
@@ -290,13 +290,12 @@ public class Program
                 }
                 case 5:
                 {
-                    if (suitcase.Items.Length != 0)
+                    if (suitcase.Count != 0)
                     {
                         Console.WriteLine("Вміст валізи:");
-                        int count = 0;
-                        foreach (var item in suitcase.Items)
+                        for (int i = 0; i < suitcase.Count; i++)
                         {
-                            Console.WriteLine($"[{count++}] - {item}");
+                            Console.WriteLine($"[{i++}] - {suitcase.Items[i]}");
                         }
                     }
                     else
@@ -306,7 +305,7 @@ public class Program
                 }
                 case 6:
                 {
-                    if (suitcase.Items.Length != 0)
+                    if (suitcase.Count != 0)
                         suitcase.Clear();
                     Console.WriteLine("Валізу очищено.");
                     break;

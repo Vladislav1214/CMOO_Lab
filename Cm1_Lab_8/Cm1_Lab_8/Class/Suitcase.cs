@@ -6,7 +6,10 @@ public class Suitcase
    public string? Brand { get; set; }
    public double Weight { get; set; }
    public double MaxVolume { get; set; }
+   
    private Item[] _items;
+   private int count;
+   private const int INITIAL_SIZE = 10;
    
    public event Action<Item>? ItemAdded;
    public event Action<Item>? ItemRemoved;
@@ -17,51 +20,77 @@ public class Suitcase
       Brand = brand;
       Weight = weight;
       MaxVolume = maxVolume;
-      _items = new Item[0];
+      _items = new Item[INITIAL_SIZE];
+      count = 0;
    }
 
    public Suitcase()
    {
-      _items = new Item[0];
+      _items = new Item[INITIAL_SIZE];
    }
    
-   public double ItemsVolume =>
-      _items.Sum(i => i.Volume);
+   public int Count { get { return count; } }
+
+   public double ItemsVolume()
+   {
+      double sum = 0;
+      for(var i = 0; i < count; i++)
+         sum += _items[i].Volume;
+      return sum;
+   }
+   
+   private void EnsureCapacity()
+   {
+      if (count == _items.Length)
+      {
+         Item[] newArray = new Item[_items.Length + 2];
+         for (int i = 0; i < _items.Length; i++)
+         {
+            newArray[i] = _items[i];
+         }
+
+         _items = newArray;
+      }
+   }
    
    public void AddItem(Item item)
    {
-      if (ItemsVolume + item.Volume > MaxVolume)
+      if (ItemsVolume() + item.Volume > MaxVolume)
          throw new VolumeExceededException($"Не можна додати '{item.Name}': об'єм перевищено.");
       
-      int newLength = _items.Length + 1;
-      Array.Resize(ref _items, newLength);
-      _items[newLength - 1] = item;
+      EnsureCapacity();
+      _items[count] = item;
+      count++;
       
       ItemAdded?.Invoke(item);
    }
    
    public bool RemoveItemByIndex(int index)
    {
-      if (index >= 0 && index < _items.Length)
+      if (index >= 0 && index < count)
       {
          Item removedItem = _items[index];
          
-         Item[] result = new Item[_items.Length - 1];
+         for (int j = index; j < count - 1; j++)
+         {
+            _items[j] = _items[j + 1];
+         }
 
-         if (index > 0)
-            Array.Copy(_items, 0, result, 0, index);
-         
-         if (index < _items.Length - 1)
-            Array.Copy(_items, index + 1, result, index, _items.Length - index - 1);
-         
-         _items = result;
-         
+         _items[count - 1] = null;
+         count--;
+
          ItemRemoved?.Invoke(removedItem);
+
          return true;
       }
+
       return false;
    }
    
+   public void Clear()
+   {
+      _items = new Item[INITIAL_SIZE];
+   }
 
    public Item[] Items
    {
@@ -70,17 +99,9 @@ public class Suitcase
          return _items;
       }
    }
-
-   public void Clear()
-   {
-      _items = new Item[0];
-   }
    
    public override string ToString()
    {
-      return $"Валіза {Brand?? "NoBrand"}, колір: {Color?? "NoColor"}, вага: {Weight} кг, обʼєм: {MaxVolume} л. Заповнено: {Math.Round(ItemsVolume, 2)} л.";
+      return $"Валіза {Brand?? "NoBrand"}, колір: {Color?? "NoColor"}, вага: {Weight} кг, обʼєм: {MaxVolume} л. Заповнено: {Math.Round(ItemsVolume(), 2)} л.";
    }
 }
-
-
-//колір; фірма-виробник; вага валізи; об’єм валізи; вміст валізи (список об’єктів, у кожного
