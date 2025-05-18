@@ -406,12 +406,19 @@ class Program
         bool menu = true;
         while (menu)
         {
+            Console.Clear();
+            Console.WriteLine("Головне меню")
+            Console.WriteLine("Аналіз тексту (1)")
+            Console.WriteLine("Цензор (2)")
+            Console.WriteLine("Колекція пісень (3)")
+            Console.WriteLine("Виід (0)")
+            Console.Write("Ваш вибір: ")
+            
             switch (CheckingForANumberIn())
             {
                 case 1:
                 {
-                    
-
+                    Console.Clear();
                     AnalyzeTextFileStatistics();
                     break;
                 }
@@ -423,6 +430,7 @@ class Program
                 }
                 case 3:
                 {
+                    Console.Clear();
                     TestingSongs();
                     break;
                 }
