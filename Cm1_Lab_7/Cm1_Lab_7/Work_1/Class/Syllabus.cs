@@ -24,14 +24,12 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         _subjects = subjects;
         _isDataSaved = false;
     }
-    
-    // Реалізація IContainer.Count
+
     public int Count 
     { 
         get { return _subjects.Length; } 
     }
     
-    // Реалізація IContainer.[int]
     public object this[int index]
     {
         get
@@ -54,7 +52,6 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         }
     }
     
-    // Реалізація IContainer.Add
     public void Add(Subject element)
     {
         if (element == null)
@@ -66,7 +63,6 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         _isDataSaved = false;
     }
     
-    // Реалізація IContainer.Delete
     public void Delete(Subject element)
     {
         if (element == null)
@@ -97,7 +93,6 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         _isDataSaved = false;
     }
     
-    // Реалізація IFileContainer.Save
     public void Save(string fileName)
     {
         if (string.IsNullOrEmpty(fileName))
@@ -127,7 +122,6 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
         }
     }
     
-    // Реалізація IFileContainer.Load
     public void Load(string fileName)
     {
         if (string.IsNullOrEmpty(fileName))
@@ -172,34 +166,29 @@ public class Syllabus  : IFileContainer, IEnumerable, IEnumerator
             throw;
         }
     }
-    
-    // Реалізація IFileContainer.IsDataSaved
+
     public bool IsDataSaved
     {
         get { return _isDataSaved; }
     }
-    
-    // Реалізація IEnumerable
+
     public IEnumerator GetEnumerator()
     {
         _position = -1;
         return this;
     }
-    
-    // Реалізація IEnumerator
+
     public bool MoveNext()
     {
         _position++;
         return (_position < _subjects.Length);
     }
     
-    // Реалізація IEnumerator
     public void Reset()
     {
         _position = -1;
     }
     
-    // Реалізація IEnumerator
     public object Current
     {
         get
