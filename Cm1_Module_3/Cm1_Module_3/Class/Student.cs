@@ -20,39 +20,81 @@ public class Student
     }
     
     public int TotalHours => SelectedDisciplines.Sum(d => d.Hours);
-    
+
+
     public void SelectDisciplines(List<Subjects> allDisciplines, int targetHours = 1200)
     {
         SelectedDisciplines.Clear();
-        
+
         foreach (var lecturer in PreferredLecturers)
         {
-            var lecturerDisciplines = allDisciplines
-                .Where(d => d.Lecturer == lecturer && !SelectedDisciplines.Contains(d))
-                .OrderByDescending(d => d.Hours);
+            var lecturerDisciplines = new List<Subjects>();
+            foreach (var discipline in allDisciplines)
+            {
+                if (discipline.Lecturer == lecturer)
+                    lecturerDisciplines.Add(discipline);
+            }
+
+            lecturerDisciplines.Sort((d1, d2) => d2.Hours.CompareTo(d1.Hours));
 
             foreach (var discipline in lecturerDisciplines)
-                if (TotalHours + discipline.Hours <= targetHours)
+            {
+                bool alreadySelected = false;
+                foreach (var selected in SelectedDisciplines)
+                {
+                    if (selected == discipline)
+                    {
+                        alreadySelected = true;
+                        break;
+                    }
+                }
+
+                if (!alreadySelected && TotalHours + discipline.Hours <= targetHours)
+                {
                     SelectedDisciplines.Add(discipline);
+                }
+            }
         }
-        
+
         if (TotalHours < targetHours)
         {
-            var programmingDisciplines = allDisciplines
-                .Where(d => d.Name.ToLower().Contains("програмування") && !SelectedDisciplines.Contains(d))
-                .OrderByDescending(d => d.Hours);
+            var programmingDisciplines = new List<Subjects>();
+            foreach (var discipline in allDisciplines)
+            {
+                if (discipline.Name.ToLower().Contains("програмування"))
+                {
+                    bool alreadySelected = false;
+                    foreach (var selected in SelectedDisciplines)
+                    {
+                        if (selected == discipline)
+                        {
+                            alreadySelected = true;
+                            break;
+                        }
+                    }
+
+                    if (!alreadySelected)
+                        programmingDisciplines.Add(discipline);
+                }
+            }
+
+            programmingDisciplines.Sort((d1, d2) => d2.Hours.CompareTo(d1.Hours));
 
             foreach (var discipline in programmingDisciplines)
+            {
                 if (TotalHours + discipline.Hours <= targetHours)
+                {
                     SelectedDisciplines.Add(discipline);
+                }
+            }
         }
-        
+
         if (TotalHours != targetHours)
         {
             Console.WriteLine($"Загальна кількість годин ({TotalHours}) не відповідає цільовій ({targetHours}).");
         }
     }
-    
+
     public void PrintSelectedDisciplines()
     {
         Console.WriteLine($"Вибрані дисципліни для {Name ?? "Student"} (Всього: {TotalHours} годин):");
